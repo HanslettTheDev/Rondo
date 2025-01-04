@@ -2,19 +2,21 @@
 <div class="login-container">
 <h1 class="title is-3">Rondo Login</h1>
 <form action="{{ url_for("auth.login") }}" method="post">
+    {% include 'components/form_error_messages.html' %}
+
   <div class="field">
-    <label class="label">Username | Email</label>
+    <label class="label">Username</label>
     <div class="control has-icons-left">
       <input
         class="input"
         type="text"
         placeholder=""
+        name="username"
       />
       <span class="icon is-small is-left">
         <i class="fas fa-user"></i>
       </span>
     </div>
-    {% include 'components/form_error_messages.html' %}
   </div>
 
   <div class="field">
@@ -23,13 +25,13 @@
       <input
         class="input"
         type="password"
-        placeholder="e.g example@gmail.com"
+        placeholder=""
+        name="password"
       />
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
     </div>
-    {% include 'components/form_error_messages.html' %}
   </div>
 
   <div class="field">
@@ -37,6 +39,8 @@
       <button class="button is-link">Login</button>
     </div>
   </div>
+
+  Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a>
   </form>
 </div>
 {% endblock %}
