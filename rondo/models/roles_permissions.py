@@ -1,5 +1,4 @@
 from rondo.extensions import db
-from rondo.models.users import Users
 from rondo.defaults import DEFAULT_ROLES
 from rondo.defaults import DEFAULT_PERMISSIONS
 
@@ -53,4 +52,6 @@ class UserPermissions(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"))
-    permission_id = db.Column(db.Integer, db.ForeignKey("permissions.id", ondelete="CASCADE"))   
+    permission_id = db.Column(db.Integer, db.ForeignKey("permissions.id", ondelete="CASCADE")) 
+
+from rondo.models.users import Users

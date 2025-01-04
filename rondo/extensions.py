@@ -10,5 +10,5 @@ migrate = Migrate()
 bcrypt = Bcrypt()
 # mail = Mail()
 login_manager = LoginManager()
-login_manager.login_view = "must_login.login"
+login_manager.login_view = "auth.login"
 login_manager.login_message_category = "info"
