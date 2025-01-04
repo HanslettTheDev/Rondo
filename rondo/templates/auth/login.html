@@ -1,0 +1,42 @@
+{% extends 'layouts/layout.html' %} {% block content %}
+<div class="login-container">
+<h1 class="title is-3">Rondo Login</h1>
+<form action="{{ url_for("auth.login") }}" method="post">
+  <div class="field">
+    <label class="label">Username | Email</label>
+    <div class="control has-icons-left">
+      <input
+        class="input"
+        type="text"
+        placeholder=""
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+    </div>
+    {% include 'components/form_error_messages.html' %}
+  </div>
+
+  <div class="field">
+    <label class="label">Password</label>
+    <div class="control has-icons-left">
+      <input
+        class="input"
+        type="password"
+        placeholder="e.g example@gmail.com"
+      />
+      <span class="icon is-small is-left">
+        <i class="fas fa-lock"></i>
+      </span>
+    </div>
+    {% include 'components/form_error_messages.html' %}
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <button class="button is-link">Login</button>
+    </div>
+  </div>
+  </form>
+</div>
+{% endblock %}

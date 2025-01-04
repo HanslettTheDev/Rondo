@@ -27,7 +27,7 @@ def fill():
 
     return jsonify({"role": list([role.name for role in roles]), "permission": list([permission.name for permission in permissions])})
 
-@admin.route("/register", methods=["GET", "POST"])
+@admin.route("/test", methods=["GET", "POST"])
 def register():
     # user = Users(
     #     username="admin", name="tambe hanslett", 
