@@ -3,7 +3,7 @@ import os
 
 path = os.path.join(
     os.path.abspath(os.path.dirname(__file__)),
-    "db.sqlite"
+    "rondo.db"
 )
 
 class Config:

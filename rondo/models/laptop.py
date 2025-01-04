@@ -1,4 +1,5 @@
-from rondo import db
+from rondo.extensions import db
+from rondo.models.users import Users
 
 class LaptopTable(db.Model):
     __tablename__ = "laptop"
@@ -22,7 +23,8 @@ class laptopIventory(db.Model):
     laptop_id = db.Column(db.Integer, db.ForeignKey("laptop.id"), nullable=False)
     defects_info = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     date_entered = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
 
     def __repr__(self):
-        return '<Laptop %r>' % self.laptop_id
+        return'<Laptop %r>' % self.id

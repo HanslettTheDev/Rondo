@@ -1,4 +1,4 @@
-from rondo import db
+from rondo.extensions import db
 from rondo.models.users import Users
 
 class Logs(db.Model):
