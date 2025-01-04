@@ -1,16 +1,6 @@
-import os
-from functools import wraps
-from flask import Flask, flash, redirect, request, url_for
-from flask_login import current_user, logout_user
+from flask import Flask 
 from rondo.extensions import db, login_manager, migrate, bcrypt
 from rondo.config import Config
-# from rondo._config import get_config
-
-path = os.path.join(
-    os.path.abspath(os.path.dirname(__file__)),
-    "db.sqlite"
-)
-
 
 
 def create_app(config_class=Config):
@@ -23,7 +13,11 @@ def create_app(config_class=Config):
     # bcrypt.init_app(app)
     # mail.init_app(app)
 
+    from rondo.auth.routes import auth
     from rondo.admin.routes import admin
+
+
     app.register_blueprint(admin)
+    app.register_blueprint(auth)
 
     return app
