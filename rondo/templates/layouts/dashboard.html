@@ -1,0 +1,44 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+
+<div class="columns main-container">
+  <div class="column is-one-fifth">
+    <nav class="sidebar">
+      <div class="sidebar-brand">
+        <!-- Icon here -->
+        <i class="fa-solid fa-compact-disc"></i>
+        <!-- Logo text -->
+        <h1 class="title is-3">Rondo</h1>
+      </div>
+
+      <div class="sidebar-items">
+        <ul>
+          <li>
+            <a> <i class="fa-solid fa-house"></i> Dashboard </a>
+          </li>
+          <li>
+            <a href=""> <i class="fa-solid fa-truck-ramp-box"></i> Iventory </a>
+          </li>
+          <li
+            ><a href=""> <i class="fa-solid fa-sack-dollar"></i> Sales </a>
+          </li>
+          <li
+            ><a href=""> <i class="fa-regular fa-user"></i> User Management </a>
+          </li>
+          <li
+            ><a href=""> <i class="fa-solid fa-server"></i> Backup </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="column" style="background-color: #f6faff">
+  {% block main %}
+
+  {% endblock %}
+  </div>
+</div>
+
+{% endblock %}

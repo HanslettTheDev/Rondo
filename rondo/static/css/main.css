@@ -11,3 +11,63 @@
 .f-center {
     text-align: center;
 }
+
+
+/* Side Navbar */
+.main-container {
+    height: 100vh;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+}
+
+.sidebar-brand {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+
+.sidebar .logo, .sidebar-brand i {
+    font-size: 30px;
+    color: #F24748;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.sidebar-items li {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.sidebar-items a {
+    text-decoration: none;
+    color: #E5E5E5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-items li:hover {
+    background-color: #F24748;
+}
+
+
+/* TOP BAR - admin/main.html */
+
+.top-bar {
+    
+}

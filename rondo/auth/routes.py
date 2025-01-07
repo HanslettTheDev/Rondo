@@ -20,11 +20,11 @@ def login():
 
         admin = db.session.execute(db.select(Users).filter_by(username=username)).first()
         if not admin:
-            flash("Password or email incorrect", "danger")
+            flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
         
         if not bcrypt.check_password_hash(admin[0].password, password):
-            flash("Password or email incorrect", "danger")
+            flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
         
         login_user(admin[0])
