@@ -18,6 +18,11 @@
     height: 100vh;
 }
 
+.secondary-container {
+    background-color: #f6faff;
+    padding: 0;
+}
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -43,7 +48,7 @@
 .sidebar-items {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    font-size: 15px;
     text-decoration: none;
 }
 
@@ -69,5 +74,88 @@
 /* TOP BAR - admin/main.html */
 
 .top-bar {
-    
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;    
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.222);
+}
+
+.top-bar .tb-left {
+    min-width: 70%;
+    display: flex;
+    /* justify-content: flex-start; */
+    /* gap: 30px; */
+}
+
+.top-bar .tb-left input::placeholder {
+    color: rgba(0, 0, 0, 0.337);
+}
+
+.top-bar .bar-items {
+    width: 100%;
+}
+
+.top-bar .bar-items ul {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+.top-bar .bar-items li {
+    /* border: 1px solid red; */
+    padding: 5px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.top-bar .bar-items ul a {
+    color: rgba(0, 0, 0, 0.794);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top-bar .bar-items li:hover {
+    background-color: #F24748;
+    color: white;   
+}
+
+.summary-section h2, .logs-section h1 {
+    color: black;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.sales-activity {
+    margin-left: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.logs-section {
+    background-color: white;
+    padding: 20px;
+    margin-left: 40px;
+}
+
+.logs-section th {
+    color: black;
+    padding: 10px;
+}
+
+.logs-section table tr, td, th {
+    background-color: rgba(4, 4, 4, 0.038);
+    color: rgba(0, 0, 0, 0.879);
+    border: 2px solid rgba(0, 0, 0, 0.624);
+}
+
+.logs-section td, th {
+    padding: 5px;
+    width: 200px;
 }
