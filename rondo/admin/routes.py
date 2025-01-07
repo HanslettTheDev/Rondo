@@ -13,6 +13,14 @@ admin = Blueprint("admin", __name__)
 def dashboard():
     return render_template("admin/main.html", title="Dashboard")
 
+@admin.route("/inventory")
+@login_required
+def inventory():
+    return render_template("admin/inventory.html", title="Inventory")
+
+
+
+
 
 # @admin.route("/fill")
 # def fill():

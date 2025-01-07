@@ -14,19 +14,19 @@
 
       <div class="sidebar-items">
         <ul>
-          <li>
-            <a> <i class="fa-solid fa-house"></i> Dashboard </a>
+          <li class="{{'active' if active_page == 'dashboard' }}">
+            <a href="{{ url_for('admin.dashboard') }}"> <i class="fa-solid fa-house"></i> Dashboard </a>
           </li>
-          <li>
-            <a href=""> <i class="fa-solid fa-truck-ramp-box"></i> Iventory </a>
+          <li class="{{'active' if active_page == 'inventory' }}">
+            <a href="{{ url_for('admin.inventory') }}"> <i class="fa-solid fa-truck-ramp-box"></i> Iventory </a>
           </li>
-          <li
+          <li class="{{'active' if active_page == 'sales' }}"
             ><a href=""> <i class="fa-solid fa-sack-dollar"></i> Sales </a>
           </li>
-          <li
+          <li class="{{'active' if active_page == 'user-management' }}"
             ><a href=""> <i class="fa-regular fa-user"></i> User Management </a>
           </li>
-          <li
+          <li class="{{'active' if active_page == 'backup' }}"
             ><a href=""> <i class="fa-solid fa-server"></i> Backup </a>
           </li>
         </ul>

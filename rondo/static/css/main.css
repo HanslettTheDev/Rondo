@@ -1,3 +1,10 @@
+/* dynamic class for changing tab colors */
+.active {
+    background-color: #F24748;
+}
+
+/* end */
+
 .login-container {
     margin-left: auto;
     margin-right: auto;
@@ -147,10 +154,11 @@
 .logs-section th {
     color: black;
     padding: 10px;
+    background-color: rgba(128, 128, 128, 0.39);
 }
 
 .logs-section table tr, td, th {
-    background-color: rgba(4, 4, 4, 0.038);
+    background-color: rgba(245, 245, 245, 0.459);
     color: rgba(0, 0, 0, 0.879);
     border: 2px solid rgba(0, 0, 0, 0.624);
 }
