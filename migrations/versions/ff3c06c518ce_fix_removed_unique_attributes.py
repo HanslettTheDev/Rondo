@@ -1,8 +1,8 @@
-"""Initial db setup and using permissions for uselist 
+"""fix: removed unique attributes
 
-Revision ID: 6001235457af
+Revision ID: ff3c06c518ce
 Revises: 
-Create Date: 2025-01-04 14:06:58.017942
+Create Date: 2025-01-08 23:11:11.862657
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6001235457af'
+revision = 'ff3c06c518ce'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,9 +26,7 @@ def upgrade():
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('date_entered', sa.DateTime(), nullable=False),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('brand_model_name'),
-    sa.UniqueConstraint('brand_name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('permissions',
     sa.Column('id', sa.Integer(), nullable=False),
