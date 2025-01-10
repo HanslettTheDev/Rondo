@@ -16,16 +16,19 @@ def dashboard():
 @admin.route('/inventory', methods=['GET', 'POST'])
 @login_required
 def inventory():
+    laptops = db.session.execute(db.select(LaptopTable)).all()
+    
     if request.method == "POST":
         brand_name = request.form["brand-name"].strip()
         model_name = request.form["model-name"].strip()
         specs = request.form["specs"].strip()
         quantity = request.form["quantity"].strip()
         price = request.form["price"].strip()
+        price = int(price) if price != "" else ""
 
         laptop_entry = LaptopTable(
             brand_name=brand_name, brand_model_name=model_name,brand_specifications=specs,
-            quantity=int(quantity),price=int(price)
+            quantity=int(quantity),price=price
         )
 
         db.session.add(laptop_entry)
@@ -34,9 +37,8 @@ def inventory():
         flash("Stock successfully added", "success")
         return redirect(url_for("admin.inventory"))
 
-
     
-    return render_template("admin/inventory.html", title="Inventory")
+    return render_template("admin/inventory.html", title="Inventory", laptops=laptops)
 
 
 
