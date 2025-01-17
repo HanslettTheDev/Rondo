@@ -19,7 +19,6 @@ def login():
         password = request.form["password"].strip()
 
         admin = db.session.execute(db.select(Users).filter_by(username=username)).first()
-        print(admin)
         if not admin:
             flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
@@ -47,7 +46,6 @@ def register():
         emails = db.session.execute(db.select(Users).filter_by(email=email)).first()
 
         if password != confirm_password:
-            print(password, confirm_password)
             flash("Passwords do not match", "danger")
             return redirect(url_for('auth.register'))
         
