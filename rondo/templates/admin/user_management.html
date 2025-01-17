@@ -1,0 +1,143 @@
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'user-management' %}
+{% block main %}
+<div class="top-bar">
+  <div class="tb-left">
+    <button
+      class="button is-success js-modal-trigger"
+      data-target="modal-js-example"
+      ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Assign
+      User</button
+    >
+  </div>
+  <div class="bar-items">
+    <ul>
+      <li>
+        <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Modal Section -->
+
+<div class="modal" id="modal-js-example">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Assign Roles</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form action="{{ url_for('admin.user_management') }}" method="post">
+        <div class="field">
+          <label class="label">Select Users Account</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select name="users-account">
+                {% for user in users %} {% if user[0].role.name != "superadmin"
+                %}
+                <option value="{{ user[0].username }}"
+                  >{{ user[0].username }}</option
+                >
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Select Users Role</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select name="users-role">
+                {% for role in roles %} {% if role[0].name != "superadmin" %}
+                <option value="{{ role[0].name }}">{{ role[0].name }}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Use Default Role Permissions</label>
+          <div class="control">
+            <label class="radio">
+              <input type="radio" name="is-default" value="yes" id="radio-yes" checked/>
+              Yes
+            </label>
+            <label class="radio">
+              <input type="radio" name="is-default" value="no" id="radio-no" />
+              No
+            </label>
+          </div>
+        </div>
+
+
+        <div class="field" id="permission-box" style="display: none;">
+          <label class="label">Select Users Permissions</label>
+          <div class="control">
+          <div class="box" id="box" aria-disabled="true">
+          </div>
+          <input style="display: none;" type="text" name="custom-permissions" id="custom-permissions">
+            <div class="select">
+              <select name="users-permissions" id="item-role">
+                {% for permission in permissions %}
+                <option value="{{ permission[0].name }}">{{ permission[0].name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button class="button is-link">Assign Users</button>
+          </div>
+        </div>
+      </form>
+    </section>
+    <!-- <footer class="modal-card-foot">
+      <div class="buttons">
+        <button class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </div>
+    </footer> -->
+  </div>
+</div>
+
+<section class="section">
+ {% include 'components/notification.html' %}
+  <div class="table-container">
+    <table class="table is-striped is-hoverable is-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Permissions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th>{{ user[0].id }}</th>
+          <td>{{ user[0].name }}</td>
+          <td>{{ user[0].username }}</td>
+          <td>{{ user[0].email }}</td>
+          <td>{{ user[0].role.name }}</td>
+          <td>{{ user[0].permission }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}

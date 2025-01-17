@@ -182,3 +182,15 @@
     background-color: #1C181C;
     color: white;
 }
+
+/* User Management */
+
+.box {
+    background-color: #1C181C;
+    border: 1px solid grey; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}

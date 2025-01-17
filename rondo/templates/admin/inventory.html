@@ -1,5 +1,5 @@
-{% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} {%
-block main %}
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} 
+{% block main %}
 <div class="top-bar">
   <div class="tb-left">
     <button
@@ -28,10 +28,7 @@ block main %}
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <div class="stock-container">
-        <h2 class="title">Enter Stock Here</h2>
         <form action="{{ url_for('admin.inventory') }}" method="post">
-          {% include 'components/form_error_messages.html' %}
           <div class="field">
             <label class="label">Laptop Brand Name</label>
             <div class="control has-icons-left">
@@ -98,7 +95,6 @@ block main %}
             </div>
           </div>
         </form>
-      </div>
     </section>
     <!-- <footer class="modal-card-foot">
       <div class="buttons">
@@ -110,6 +106,7 @@ block main %}
 </div>
 
 <section class="section">
+    {% include 'components/notification.html' %}
   <div class="table-container">
     <table class="table is-striped is-hoverable is-bordered">
       <thead>

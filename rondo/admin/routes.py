@@ -1,5 +1,7 @@
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
+from rondo.admin.utils import get_permission_objects
+from rondo.defaults import DEFAULT_ROLE_PERMISSIONS
 from rondo.extensions import db, bcrypt
 from rondo.models.users import Users
 from rondo.models.roles_permissions import Role, UserRoles, Permissions
@@ -42,6 +44,44 @@ def inventory():
 
 
 
+@admin.route('/user_management', methods=['GET', 'POST'])
+@login_required
+def user_management():
+    users = db.session.execute(db.select(Users)).all()
+    roles = db.session.execute(db.select(Role)).all()
+    permsisions = db.session.execute(db.select(Permissions)).all()
+
+    if request.method == "POST":
+        users_account = request.form["users-account"].strip()
+        new_role = request.form["users-role"].strip().lower()
+        new_permsisions = (
+            request.form["custom-permissions"].strip().split(" ") if 
+            request.form["is-default"].lower() == "no" 
+            else DEFAULT_ROLE_PERMISSIONS[new_role]
+        )
+
+        user = db.session.execute(db.select(Users).filter_by(username=users_account)).first()
+        # Get the new role and assign it to the user
+        role = db.session.execute(db.select(Role).filter_by(name=new_role)).first()
+        # Check if the new role is the same as the old one
+        if user[0].role.name.lower() == new_role:
+            flash(f"Oops! Sorry! {user[0].username} already has this role!", "warning")
+            return redirect(url_for("admin.user_management"))
+        if user and role:
+            user[0].role = role[0]
+            for permission in get_permission_objects(new_permsisions):
+                user[0].permissions.append(permission[0])
+
+        db.session.commit()
+        flash(
+            f"<b class='is-info'>@{user[0].username}</b> has successfully been assigned the <b>{role[0].name}</b> role!", 
+            "info"
+        )
+        return redirect(url_for('admin.user_management'))
+    
+    return render_template("admin/user_management.html", title="User Management", 
+        users=users, roles=roles, permissions=permsisions
+    )
 
 
 # @admin.route("/fill")
@@ -79,4 +119,4 @@ def inventory():
 #     # db.session.add(user)
 #     db.session.commit()
 
-#     return jsonify({"users": user.role.name})
+#     return jsonify({"users":  user.role.name})
