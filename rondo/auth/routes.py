@@ -15,10 +15,11 @@ def login():
         return redirect(url_for('admin.dashboard'))
     
     if request.method == "POST":
-        username = request.form["username"].strip()
+        username = request.form["username"].strip().lower()
         password = request.form["password"].strip()
 
         admin = db.session.execute(db.select(Users).filter_by(username=username)).first()
+        print(admin)
         if not admin:
             flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
@@ -37,7 +38,7 @@ def login():
 def register():
     if request.method == "POST":
         name = request.form["full-name"].strip()
-        username = request.form["full-name"].strip()
+        username = request.form["full-name"].strip().lower()
         email = request.form["username"].strip()
         password = request.form["password"].strip()
         confirm_password = request.form["confirm-password"].strip()

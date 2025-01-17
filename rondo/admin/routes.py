@@ -59,6 +59,7 @@ def user_management():
             request.form["is-default"].lower() == "no" 
             else DEFAULT_ROLE_PERMISSIONS[new_role]
         )
+        print(new_permsisions)
 
         user = db.session.execute(db.select(Users).filter_by(username=users_account)).first()
         # Get the new role and assign it to the user
@@ -67,6 +68,10 @@ def user_management():
         if user[0].role.name.lower() == new_role:
             flash(f"Oops! Sorry! {user[0].username} already has this role!", "warning")
             return redirect(url_for("admin.user_management"))
+        # TODO: Fix the small bug where the permission id needs to removed from the user_permissions table
+        # before being added as the new Permissions
+        # So rather the users permissions be removed completely and then the new ones added
+
         if user and role:
             user[0].role = role[0]
             for permission in get_permission_objects(new_permsisions):
@@ -74,7 +79,7 @@ def user_management():
 
         db.session.commit()
         flash(
-            f"<b class='is-info'>@{user[0].username}</b> has successfully been assigned the <b>{role[0].name}</b> role!", 
+            f"<b>@{user[0].username}</b> has successfully been assigned the <b>{role[0].name}</b> role!", 
             "info"
         )
         return redirect(url_for('admin.user_management'))
