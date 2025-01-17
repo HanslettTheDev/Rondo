@@ -38,8 +38,8 @@ def login():
 def register():
     if request.method == "POST":
         name = request.form["full-name"].strip()
-        username = request.form["full-name"].strip().lower()
-        email = request.form["username"].strip()
+        username = request.form["username"].strip().lower()
+        email = request.form["email"].strip()
         password = request.form["password"].strip()
         confirm_password = request.form["confirm-password"].strip()
 
