@@ -1,0 +1,75 @@
+{% extends 'layouts/dashboard.html' %}
+
+{% block main %}
+<div class="login-container" style="background-color: #1C181C;">
+
+<form action="{{ url_for('admin.edit_inventory', id=laptop.id) }}" method="post">
+  <div class="field">
+    <label class="label">Laptop Brand Name</label>
+    <div class="control has-icons-left">
+      <input
+        class="input"
+        type="text"
+        value="{{ laptop.brand_name }}"
+        placeholder="Dell"
+        name="brand-name"
+        required
+      />
+      <span class="icon is-small is-left">
+        <i class="fa-solid fa-tag"></i>
+      </span>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Laptop Brand Model Name</label>
+    <div class="control has-icons-left">
+      <input
+        class="input"
+        type="text"
+        placeholder="XPS Series"
+        value="{{ laptop.brand_model_name }}"
+        name="model-name"
+        required
+      />
+      <span class="icon is-small is-left">
+        <i class="fa-solid fa-tag"></i>
+      </span>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Laptop Specifications</label>
+    <textarea
+      class="textarea is-info"
+      placeholder="e.g. Intel Core i7....."
+      name="specs"
+      required
+    >{{ laptop.brand_specifications }}</textarea>
+  </div>
+
+  <div class="field">
+    <label class="label">Quantity</label>
+    <div class="control has-icons-left">
+      <input class="input" type="number" name="quantity" value="{{ laptop.quantity }}" required />
+      <span class="icon is-small is-left">
+        <i class="fa-solid fa-basket-shopping"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Price <small>(Optional)</small></label>
+    <div class="control has-icons-left">
+      <input class="input" type="text" value="{{ laptop.price }}" name="price" />
+      <span class="icon is-small is-left">
+        <i class="fa-solid fa-dollar-sign"></i>
+      </span>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-link">Save</button>
+    </div>
+  </div>
+</form>
+</div>
+{% endblock %}

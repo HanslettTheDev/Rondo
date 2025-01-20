@@ -7,6 +7,7 @@ from rondo.models.users import Users
 from rondo.models.roles_permissions import Role, UserRoles, Permissions
 from rondo.models.logs import Logs
 from rondo.models.laptop import LaptopTable, laptopIventory
+from rondo.wrappers import role_required
 
 admin = Blueprint("admin", __name__)
 
@@ -42,6 +43,40 @@ def inventory():
     
     return render_template("admin/inventory.html", title="Inventory", laptops=laptops)
 
+@admin.route("/inventory/edit/<int:id>", methods=["GET", "POST"])
+def edit_inventory(id):
+    laptop = db.session.execute(db.select(LaptopTable).filter_by(id=id)).first()
+
+    if request.method == "POST":
+        laptop[0].brand_name = request.form["brand-name"].strip()
+        laptop[0].brand_model_name = request.form["model-name"].strip()
+        laptop[0].brand_specifications = request.form["specs"].strip()
+        laptop[0].quantity = request.form["quantity"].strip()
+        price = request.form["price"].strip()
+        laptop[0].price = int(price) if price != "" else ""
+
+        db.session.add(laptop[0])
+        db.session.commit()
+
+        flash("Record Modified Successfully", "success")
+        return redirect(url_for("admin.inventory"))
+        
+    return render_template("admin/edit_inventory.html", laptop=laptop[0])
+
+
+@admin.route("/inventory/delete/<int:id>", methods=["GET", "POST"])
+def delete_inventory(id):
+    laptop = db.session.execute(db.select(LaptopTable).filter_by(id=id)).first()
+
+    if laptop:
+        db.session.delete(laptop[0])
+        db.session.commit()
+
+        flash("Record deleted successfully", "success")
+        return redirect(url_for("admin.inventory"))
+    else:
+        flash("An error occured while deleting this record! Try again later", "danger")
+        return redirect(url_for("admin.inventory"))
 
 
 @admin.route('/user_management', methods=['GET', 'POST'])

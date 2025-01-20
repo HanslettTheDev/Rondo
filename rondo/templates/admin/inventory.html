@@ -1,5 +1,5 @@
-{% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} 
-{% block main %}
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} {%
+block main %}
 <div class="top-bar">
   <div class="tb-left">
     <button
@@ -28,85 +28,79 @@
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-        <form action="{{ url_for('admin.inventory') }}" method="post">
-          <div class="field">
-            <label class="label">Laptop Brand Name</label>
-            <div class="control has-icons-left">
-              <input
-                class="input"
-                type="text"
-                placeholder="Dell"
-                name="brand-name"
-                required
-              />
-              <span class="icon is-small is-left">
-                <i class="fa-solid fa-tag"></i>
-              </span>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Laptop Brand Model Name</label>
-            <div class="control has-icons-left">
-              <input
-                class="input"
-                type="text"
-                placeholder="XPS Series"
-                name="model-name"
-                required
-              />
-              <span class="icon is-small is-left">
-                <i class="fa-solid fa-tag"></i>
-              </span>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Laptop Specifications</label>
-            <textarea
-              class="textarea is-info"
-              placeholder="e.g. Intel Core i7....."
-              name="specs"
+      <form action="{{ url_for('admin.inventory') }}" method="post">
+        <div class="field">
+          <label class="label">Laptop Brand Name</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="Dell"
+              name="brand-name"
               required
-            ></textarea>
+            />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
           </div>
+        </div>
+        <div class="field">
+          <label class="label">Laptop Brand Model Name</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="XPS Series"
+              name="model-name"
+              required
+            />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Laptop Specifications</label>
+          <textarea
+            class="textarea is-info"
+            placeholder="e.g. Intel Core i7....."
+            name="specs"
+            required
+          ></textarea>
+        </div>
 
-          <div class="field">
-            <label class="label">Quantity</label>
-            <div class="control has-icons-left">
-              <input class="input" type="number" name="quantity" required />
-              <span class="icon is-small is-left">
-                <i class="fa-solid fa-basket-shopping"></i>
-              </span>
-            </div>
+        <div class="field">
+          <label class="label">Quantity</label>
+          <div class="control has-icons-left">
+            <input class="input" type="number" name="quantity" required />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </span>
           </div>
+        </div>
 
-          <div class="field">
-            <label class="label">Price <small>(Optional)</small></label>
-            <div class="control has-icons-left">
-              <input class="input" type="text" placeholder="" name="price" />
-              <span class="icon is-small is-left">
-                <i class="fa-solid fa-dollar-sign"></i>
-              </span>
-            </div>
+        <div class="field">
+          <label class="label">Price <small>(Optional)</small></label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" placeholder="" name="price" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-dollar-sign"></i>
+            </span>
           </div>
+        </div>
 
-          <div class="field">
-            <div class="control">
-              <button class="button is-link">Save</button>
-            </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-link">Save</button>
           </div>
-        </form>
+        </div>
+      </form>
     </section>
-    <!-- <footer class="modal-card-foot">
-      <div class="buttons">
-        <button class="button is-success">Save changes</button>
-        <button class="button">Cancel</button>
-      </div>
-    </footer> -->
   </div>
 </div>
 
-<section class="section">
-    {% include 'components/notification.html' %}
+<section class="section isec">
+  {% include 'components/notification.html' %}
   <div class="table-container">
     <table class="table is-striped is-hoverable is-bordered">
       <thead>
@@ -118,18 +112,33 @@
           <th>Quantity</th>
           <th>Price</th>
           <th>Date Entered</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         {% for laptop in laptops %}
+        {% include 'components/confirm_delete.html' %}
         <tr>
-          <th>{{ laptop[0].id }}</th>
+          <th>{{ loop.index }}</th>
           <td>{{ laptop[0].brand_name }}</td>
           <td>{{ laptop[0].brand_model_name }}</td>
           <td>{{ laptop[0].brand_specifications }}</td>
           <td>{{ laptop[0].quantity }}</td>
           <td>{{ laptop[0].price }}</td>
           <td>{{ laptop[0].date_entered }}</td>
+          <td>
+            <a
+              class="button is-link is-info is-small"
+              href="{{ url_for('admin.edit_inventory', id=laptop[0].id) }}"
+              ><i class="fa-solid fa-pencil"></i
+            ></a>
+            |
+            <a
+              class="button is-link is-danger is-small js-modal-trigger"
+              data-target="confirm-delete"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

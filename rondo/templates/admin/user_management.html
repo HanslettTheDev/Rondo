@@ -127,7 +127,7 @@
       <tbody>
         {% for user in users %}
         <tr>
-          <th>{{ user[0].id }}</th>
+          <th>{{ loop.index }}</th>
           <td>{{ user[0].name }}</td>
           <td>{{ user[0].username }}</td>
           <td>{{ user[0].email }}</td>

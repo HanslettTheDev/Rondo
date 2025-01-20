@@ -1,0 +1,8 @@
+{
+  "default_role_pages": {
+    "superadmin": "admin.dashboard",
+    "admin": "admin.dashboard",
+    "editor": "editor.dashboard",
+    "user": "user.dashboard"
+  }
+}
