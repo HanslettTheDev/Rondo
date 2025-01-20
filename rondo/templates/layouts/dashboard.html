@@ -1,6 +1,4 @@
-{% extends 'layouts/layout.html' %}
-
-{% block content %}
+{% extends 'layouts/layout.html' %} {% block content %}
 
 <div class="columns main-container">
   <div class="column is-3">
@@ -15,29 +13,48 @@
       <div class="sidebar-items">
         <ul>
           <li class="{{'active' if active_page == 'dashboard' }}">
-            <a href="{{ url_for('admin.dashboard') }}"> <i class="fa-solid fa-house"></i> Dashboard </a>
+            <a href="{{ url_for('admin.dashboard') }}">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
           </li>
           <li class="{{'active' if active_page == 'inventory' }}">
-            <a href="{{ url_for('admin.inventory') }}"> <i class="fa-solid fa-truck-ramp-box"></i> Iventory </a>
+            <a href="{{ url_for('admin.inventory') }}">
+              <i class="fa-solid fa-truck-ramp-box"></i> Iventory
+            </a>
           </li>
           <li class="{{'active' if active_page == 'user-management' }}"
-            ><a href="{{ url_for('admin.user_management') }}"> <i class="fa-regular fa-user"></i> User Management </a>
+            ><a href="{{ url_for('admin.user_management') }}">
+              <i class="fa-regular fa-user"></i> User Management
+            </a>
           </li>
-          <li class="{{'active' if active_page == 'sales' }}"
+          <!-- <li class="{{'active' if active_page == 'sales' }}"
             ><a href=""> <i class="fa-solid fa-sack-dollar"></i> Sales </a>
+          </li> -->
+          <li class="{{'active' if active_page == 'logs' }}"
+            ><a href="{{ url_for('admin.logs') }}"> <i class="fa-solid fa-clipboard"></i> Logs </a>
           </li>
-          <li class="{{'active' if active_page == 'backup' }}"
+          <!-- <li class="{{'active' if active_page == 'backup' }}"
             ><a href=""> <i class="fa-solid fa-server"></i> Backup </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
   </div>
 
   <div class="column secondary-container">
-  {% block main %}
-
-  {% endblock %}
+    <div class="top-bar">
+      <div class="tb-left"> {% block top_bar_buttons %} {% endblock %} </div>
+      <div class="bar-items">
+        <ul>
+          {% block right_bar_buttons %}
+          <li>
+            <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
+          </li>
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+    {% block main %} {% endblock %}
   </div>
 </div>
 

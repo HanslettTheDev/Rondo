@@ -123,6 +123,9 @@ def user_management():
         users=users, roles=roles, permissions=permsisions
     )
 
+@admin.route('/logs')
+def logs():
+    return render_template("admin/logs.html")
 
 # @admin.route("/fill")
 # def fill():

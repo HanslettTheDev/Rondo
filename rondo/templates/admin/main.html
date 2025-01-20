@@ -1,36 +1,34 @@
-{% extends 'layouts/dashboard.html' %} 
-{% set active_page = 'dashboard' %}
-{% block main %}
-
-<div class="top-bar">
-  <div class="tb-left">
-    <div class="control has-icons-left">
-      <input
-        class="input is-normal is-rounded"
-        type="search"
-        placeholder="Search"
-        name="search"
-        style="background-color: white; color: black"
-      />
-      <span class="icon is-normal is-left">
-        <i class="fa-solid fa-magnifying-glass" style="color: black"></i>
-      </span>
-    </div>
-  </div>
-  <div class="bar-items">
-    <ul>
-      <li>
-        <a href=""> <i class="fa-solid fa-user"></i> Account </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa-solid fa-gear"></i> Settings </a>
-      </li>
-      <li>
-        <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
-      </li>
-    </ul>
-  </div>
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'dashboard' %} {%
+block top_bar_buttons %}
+<div class="control has-icons-left">
+  <input
+    class="input is-normal is-rounded"
+    type="search"
+    placeholder="Search"
+    name="search"
+    style="background-color: white; color: black"
+  />
+  <span class="icon is-normal is-left">
+    <i class="fa-solid fa-magnifying-glass" style="color: black"></i>
+  </span>
 </div>
+{% endblock %} 
+
+
+{% block right_bar_buttons %}
+<li>
+  <a href=""> <i class="fa-solid fa-user"></i> Account </a>
+</li>
+<li>
+  <a href=""> <i class="fa-solid fa-gear"></i> Settings </a>
+</li>
+<li>
+  <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
+</li>
+{% endblock %}
+
+{% block main %} 
+
 
 <div class="summary-section">
   <div class="columns">
@@ -39,22 +37,15 @@
       <div class="sales-activity">
         {% include 'components/sales_card.html' %} {% include
         'components/sales_card.html' %} {% include 'components/sales_card.html'
-        %} {% include 'components/sales_card.html' %}
+        %}
       </div>
     </div>
     <div class="column">
       <h2 class="title is-4">Inventory Summary</h2>
       <div class="sales-activity">
-        {% include 'components/sales_card.html' %} {% include
-        'components/sales_card.html' %}
+        {% include 'components/sales_card.html' %}
       </div>
     </div>
   </div>
 </div>
-
-<div class="logs-section">
-  <h1 class="title is-4">System Logs</h1>
-  {% include 'components/dashboard_table.html' %}
-</div>
-
 {% endblock %}

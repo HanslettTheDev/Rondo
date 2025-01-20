@@ -1,22 +1,14 @@
 {% extends 'layouts/dashboard.html' %} {% set active_page = 'user-management' %}
+{% block top_bar_buttons %}
+<button
+  class="button is-success js-modal-trigger"
+  data-target="modal-js-example"
+  ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Assign
+  User</button
+>
+{% endblock %} 
+
 {% block main %}
-<div class="top-bar">
-  <div class="tb-left">
-    <button
-      class="button is-success js-modal-trigger"
-      data-target="modal-js-example"
-      ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Assign
-      User</button
-    >
-  </div>
-  <div class="bar-items">
-    <ul>
-      <li>
-        <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <!-- Modal Section -->
 
@@ -67,7 +59,13 @@
           <label class="label">Use Default Role Permissions</label>
           <div class="control">
             <label class="radio">
-              <input type="radio" name="is-default" value="yes" id="radio-yes" checked/>
+              <input
+                type="radio"
+                name="is-default"
+                value="yes"
+                id="radio-yes"
+                checked
+              />
               Yes
             </label>
             <label class="radio">
@@ -77,17 +75,22 @@
           </div>
         </div>
 
-
-        <div class="field" id="permission-box" style="display: none;">
+        <div class="field" id="permission-box" style="display: none">
           <label class="label">Select Users Permissions</label>
           <div class="control">
-          <div class="box" id="box" aria-disabled="true">
-          </div>
-          <input style="display: none;" type="text" name="custom-permissions" id="custom-permissions">
+            <div class="box" id="box" aria-disabled="true"> </div>
+            <input
+              style="display: none"
+              type="text"
+              name="custom-permissions"
+              id="custom-permissions"
+            />
             <div class="select">
               <select name="users-permissions" id="item-role">
                 {% for permission in permissions %}
-                <option value="{{ permission[0].name }}">{{ permission[0].name }}</option>
+                <option value="{{ permission[0].name }}"
+                  >{{ permission[0].name }}</option
+                >
                 {% endfor %}
               </select>
             </div>
@@ -111,7 +114,7 @@
 </div>
 
 <section class="section">
- {% include 'components/notification.html' %}
+  {% include 'components/notification.html' %}
   <div class="table-container">
     <table class="table is-striped is-hoverable is-bordered">
       <thead>

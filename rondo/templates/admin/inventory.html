@@ -1,22 +1,12 @@
 {% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} {%
-block main %}
-<div class="top-bar">
-  <div class="tb-left">
-    <button
-      class="button is-success js-modal-trigger"
-      data-target="modal-js-example"
-      ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add
-      Stock</button
-    >
-  </div>
-  <div class="bar-items">
-    <ul>
-      <li>
-        <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
-      </li>
-    </ul>
-  </div>
-</div>
+block top_bar_buttons %}
+<button
+  class="button is-success js-modal-trigger"
+  data-target="modal-js-example"
+  ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Stock</button
+>
+
+{% endblock %} {% block main %}
 
 <!-- Modal Section -->
 
@@ -116,8 +106,8 @@ block main %}
         </tr>
       </thead>
       <tbody>
-        {% for laptop in laptops %}
-        {% include 'components/confirm_delete.html' %}
+        {% for laptop in laptops %} {% include 'components/confirm_delete.html'
+        %}
         <tr>
           <th>{{ loop.index }}</th>
           <td>{{ laptop[0].brand_name }}</td>
