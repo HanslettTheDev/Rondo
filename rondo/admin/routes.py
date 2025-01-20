@@ -105,7 +105,7 @@ def user_management():
             return redirect(url_for("admin.user_management"))
         # TODO: Fix the small bug where the permission id needs to removed from the user_permissions table
         # before being added as the new Permissions
-        # So rather the users permissions be removed completely and then the new ones added
+        # That is the users permissions should be removed completely and then the new ones assigned to the user
 
         if user and role:
             user[0].role = role[0]
