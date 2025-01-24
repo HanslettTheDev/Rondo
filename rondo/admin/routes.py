@@ -1,6 +1,5 @@
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
-from rondo.admin.utils import get_permission_objects
 from rondo.defaults import DEFAULT_ROLE_PERMISSIONS
 from rondo.extensions import db, bcrypt
 from rondo.models.users import Users
@@ -8,6 +7,7 @@ from rondo.models.roles_permissions import Role, UserRoles, Permissions
 from rondo.models.logs import Logs
 from rondo.models.laptop import LaptopTable, laptopIventory
 from rondo.wrappers import role_required
+from rondo.admin.utils import get_permission_objects, check_permission
 
 admin = Blueprint("admin", __name__)
 
@@ -18,6 +18,7 @@ def dashboard():
 
 @admin.route('/inventory', methods=['GET', 'POST'])
 @login_required
+@role_required(["superadmin", "admin"])
 def inventory():
     laptops = db.session.execute(db.select(LaptopTable)).all()
     
@@ -41,9 +42,11 @@ def inventory():
         return redirect(url_for("admin.inventory"))
 
     
-    return render_template("admin/inventory.html", title="Inventory", laptops=laptops)
+    return render_template("admin/inventory.html", title="Inventory", laptops=laptops, cp=check_permission)
 
 @admin.route("/inventory/edit/<int:id>", methods=["GET", "POST"])
+@login_required
+@role_required(["superadmin", "admin"])
 def edit_inventory(id):
     laptop = db.session.execute(db.select(LaptopTable).filter_by(id=id)).first()
 
@@ -65,6 +68,8 @@ def edit_inventory(id):
 
 
 @admin.route("/inventory/delete/<int:id>", methods=["GET", "POST"])
+@login_required
+@role_required(["superadmin", "admin"])
 def delete_inventory(id):
     laptop = db.session.execute(db.select(LaptopTable).filter_by(id=id)).first()
 
@@ -81,6 +86,7 @@ def delete_inventory(id):
 
 @admin.route('/user_management', methods=['GET', 'POST'])
 @login_required
+@role_required(["superadmin"])
 def user_management():
     users = db.session.execute(db.select(Users)).all()
     roles = db.session.execute(db.select(Role)).all()
@@ -94,8 +100,6 @@ def user_management():
             request.form["is-default"].lower() == "no" 
             else DEFAULT_ROLE_PERMISSIONS[new_role]
         )
-        print(new_permsisions)
-
         user = db.session.execute(db.select(Users).filter_by(username=users_account)).first()
         # Get the new role and assign it to the user
         role = db.session.execute(db.select(Role).filter_by(name=new_role)).first()
@@ -124,6 +128,8 @@ def user_management():
     )
 
 @admin.route('/logs')
+@login_required
+@role_required(["superadmin"])
 def logs():
     return render_template("admin/logs.html")
 

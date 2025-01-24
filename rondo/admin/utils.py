@@ -9,3 +9,11 @@ def get_permission_objects(perm_list: list) -> list:
         x = db.session.execute(db.select(Permissions).filter_by(name=permission.lower())).first()
         permissions.append(x)
     return permissions
+
+
+def check_permission(permissions: list, required_permission:str):
+    permissions = [x.name for x in permissions]
+    print(permissions)
+    if required_permission in permissions:
+        return True 
+    return False

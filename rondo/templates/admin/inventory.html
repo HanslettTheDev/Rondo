@@ -117,17 +117,21 @@ block top_bar_buttons %}
           <td>{{ laptop[0].price }}</td>
           <td>{{ laptop[0].date_entered }}</td>
           <td>
+          {% if cp(current_user.permissions, 'edit') %}
             <a
               class="button is-link is-info is-small"
               href="{{ url_for('admin.edit_inventory', id=laptop[0].id) }}"
               ><i class="fa-solid fa-pencil"></i
             ></a>
             |
+          {% endif %}
+          {% if cp(current_user.permissions, 'delete') %}
             <a
               class="button is-link is-danger is-small js-modal-trigger"
               data-target="confirm-delete"
               ><i class="fa-solid fa-trash"></i
             ></a>
+          {% endif %}
           </td>
         </tr>
         {% endfor %}
