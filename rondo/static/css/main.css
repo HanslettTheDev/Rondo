@@ -1,3 +1,10 @@
+/* dynamic class for changing tab colors */
+.active {
+    background-color: #F24748;
+}
+
+/* end */
+
 .login-container {
     margin-left: auto;
     margin-right: auto;
@@ -10,4 +17,187 @@
 
 .f-center {
     text-align: center;
+}
+
+
+/* Side Navbar */
+.main-container {
+    height: 100vh;
+}
+
+.secondary-container {
+    background-color: #f6faff;
+    padding: 0;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+}
+
+.sidebar-brand {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+
+.sidebar .logo, .sidebar-brand i {
+    font-size: 30px;
+    color: #F24748;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.sidebar-items li {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.sidebar-items a {
+    text-decoration: none;
+    color: #E5E5E5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-items li:hover {
+    background-color: #F24748;
+}
+
+
+/* TOP BAR - admin/main.html */
+
+.top-bar {
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;    
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.222);
+}
+
+.top-bar .tb-left {
+    min-width: 70%;
+    display: flex;
+    /* justify-content: flex-start; */
+    /* gap: 30px; */
+}
+
+.top-bar .tb-left input::placeholder {
+    color: rgba(0, 0, 0, 0.337);
+}
+
+.top-bar .bar-items {
+    width: 100%;
+}
+
+.top-bar .bar-items ul {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+.top-bar .bar-items li {
+    /* border: 1px solid red; */
+    padding: 5px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.top-bar .bar-items ul a {
+    color: rgba(0, 0, 0, 0.794);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top-bar .bar-items li:hover {
+    background-color: #F24748;
+    color: white;   
+}
+
+.summary-section h2, .logs-section h1 {
+    color: black;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.sales-activity {
+    margin-left: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.logs-section {
+    background-color: white;
+    padding: 20px;
+    margin-left: 40px;
+}
+
+.logs-section th {
+    color: black;
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.39);
+}
+
+.logs-section table tr, td, th {
+    background-color: rgba(245, 245, 245, 0.459);
+    color: rgba(0, 0, 0, 0.879);
+    border: 2px solid rgba(0, 0, 0, 0.624);
+}
+
+.logs-section td, th {
+    padding: 5px;
+    width: 200px;
+}
+
+
+/* Inventory */
+
+.stock-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 500px;
+    padding: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    background-color: #1C181C;
+    color: white;
+}
+
+.isec {
+    height: 90%;
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+/* User Management */
+
+.box {
+    background-color: #1C181C;
+    border: 1px solid grey; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
 }

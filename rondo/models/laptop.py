@@ -5,8 +5,8 @@ class LaptopTable(db.Model):
     __tablename__ = "laptop"
 
     id = db.Column(db.Integer, primary_key=True)
-    brand_name = db.Column(db.String(80), nullable=False, unique=True)
-    brand_model_name = db.Column(db.String(80), nullable=False, unique=True)
+    brand_name = db.Column(db.String(80), nullable=False)
+    brand_model_name = db.Column(db.String(80), nullable=False)
     brand_specifications = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Integer)

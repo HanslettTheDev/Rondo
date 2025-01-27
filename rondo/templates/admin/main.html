@@ -1,14 +1,51 @@
-{% extends 'layouts/layout.html' %}
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'dashboard' %} {%
+block top_bar_buttons %}
+<div class="control has-icons-left">
+  <input
+    class="input is-normal is-rounded"
+    type="search"
+    placeholder="Search"
+    name="search"
+    style="background-color: white; color: black"
+  />
+  <span class="icon is-normal is-left">
+    <i class="fa-solid fa-magnifying-glass" style="color: black"></i>
+  </span>
+</div>
+{% endblock %} 
 
-{% block content %}
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
+
+{% block right_bar_buttons %}
+<li>
+  <a href=""> <i class="fa-solid fa-user"></i> Account </a>
+</li>
+<li>
+  <a href=""> <i class="fa-solid fa-gear"></i> Settings </a>
+</li>
+<li>
+  <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
+</li>
+{% endblock %}
+
+{% block main %} 
+
+
+<div class="summary-section">
+  <div class="columns">
+    <div class="column is-two-thirds">
+      <h2 class="title is-4">Sales Activity</h2>
+      <div class="sales-activity">
+        {% include 'components/sales_card.html' %} {% include
+        'components/sales_card.html' %} {% include 'components/sales_card.html'
+        %}
+      </div>
     </div>
-  </section>
+    <div class="column">
+      <h2 class="title is-4">Inventory Summary</h2>
+      <div class="sales-activity">
+        {% include 'components/sales_card.html' %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

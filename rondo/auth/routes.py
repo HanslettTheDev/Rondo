@@ -15,16 +15,16 @@ def login():
         return redirect(url_for('admin.dashboard'))
     
     if request.method == "POST":
-        username = request.form["username"].strip()
+        username = request.form["username"].strip().lower()
         password = request.form["password"].strip()
 
         admin = db.session.execute(db.select(Users).filter_by(username=username)).first()
         if not admin:
-            flash("Password or email incorrect", "danger")
+            flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
         
         if not bcrypt.check_password_hash(admin[0].password, password):
-            flash("Password or email incorrect", "danger")
+            flash("Password or username incorrect", "danger")
             return render_template("auth/login.html")
         
         login_user(admin[0])
@@ -37,8 +37,8 @@ def login():
 def register():
     if request.method == "POST":
         name = request.form["full-name"].strip()
-        username = request.form["full-name"].strip()
-        email = request.form["username"].strip()
+        username = request.form["username"].strip().lower()
+        email = request.form["email"].strip()
         password = request.form["password"].strip()
         confirm_password = request.form["confirm-password"].strip()
 
@@ -46,7 +46,6 @@ def register():
         emails = db.session.execute(db.select(Users).filter_by(email=email)).first()
 
         if password != confirm_password:
-            print(password, confirm_password)
             flash("Passwords do not match", "danger")
             return redirect(url_for('auth.register'))
         

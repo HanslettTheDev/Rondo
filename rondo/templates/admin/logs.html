@@ -1,0 +1,11 @@
+{% extends 'layouts/dashboard.html' %}
+{% set active_page='logs' %}
+
+{% block main %}
+
+<div class="logs-section">
+  <h1 class="title is-4">System Logs</h1>
+  {% include 'components/dashboard_table.html' %}
+</div>
+
+{% endblock %}

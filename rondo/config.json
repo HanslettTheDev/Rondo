@@ -1,0 +1,16 @@
+{
+  "default_role_pages": {
+    "superadmin": "admin.dashboard",
+    "admin": "admin.dashboard",
+    "editor": "editor.dashboard",
+    "user": "user.dashboard"
+  },
+  "permissions": [
+    "create",
+    "view",
+    "update",
+    "delete",
+    "superadmin.modify_roles",
+    "superadmin.remove_roles"
+  ]
+}

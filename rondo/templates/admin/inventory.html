@@ -1,0 +1,143 @@
+{% extends 'layouts/dashboard.html' %} {% set active_page = 'inventory' %} {%
+block top_bar_buttons %}
+<button
+  class="button is-success js-modal-trigger"
+  data-target="modal-js-example"
+  ><i class="fa-solid fa-plus" style="margin-right: 5px"></i> Add Stock</button
+>
+
+{% endblock %} {% block main %}
+
+<!-- Modal Section -->
+
+<div class="modal" id="modal-js-example">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Stock Entry</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form action="{{ url_for('admin.inventory') }}" method="post">
+        <div class="field">
+          <label class="label">Laptop Brand Name</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="Dell"
+              name="brand-name"
+              required
+            />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Laptop Brand Model Name</label>
+          <div class="control has-icons-left">
+            <input
+              class="input"
+              type="text"
+              placeholder="XPS Series"
+              name="model-name"
+              required
+            />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-tag"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Laptop Specifications</label>
+          <textarea
+            class="textarea is-info"
+            placeholder="e.g. Intel Core i7....."
+            name="specs"
+            required
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label class="label">Quantity</label>
+          <div class="control has-icons-left">
+            <input class="input" type="number" name="quantity" required />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Price <small>(Optional)</small></label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" placeholder="" name="price" />
+            <span class="icon is-small is-left">
+              <i class="fa-solid fa-dollar-sign"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button class="button is-link">Save</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+
+<section class="section isec">
+  {% include 'components/notification.html' %}
+  <div class="table-container">
+    <table class="table is-striped is-hoverable is-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand Name</th>
+          <th>Brand Model Name</th>
+          <th>Brand Specifications</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Date Entered</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for laptop in laptops %} {% include 'components/confirm_delete.html'
+        %}
+        <tr>
+          <th>{{ loop.index }}</th>
+          <td>{{ laptop[0].brand_name }}</td>
+          <td>{{ laptop[0].brand_model_name }}</td>
+          <td>{{ laptop[0].brand_specifications }}</td>
+          <td>{{ laptop[0].quantity }}</td>
+          <td>{{ laptop[0].price }}</td>
+          <td>{{ laptop[0].date_entered }}</td>
+          <td>
+          {% if cp(current_user.permissions, 'edit') %}
+            <a
+              class="button is-link is-info is-small"
+              href="{{ url_for('admin.edit_inventory', id=laptop[0].id) }}"
+              ><i class="fa-solid fa-pencil"></i
+            ></a>
+            |
+          {% endif %}
+          {% if cp(current_user.permissions, 'delete') %}
+            <a
+              class="button is-link is-danger is-small js-modal-trigger"
+              data-target="confirm-delete"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}
