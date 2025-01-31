@@ -14,10 +14,10 @@ def create_app(config_class=Config):
     # mail.init_app(app)
 
     from rondo.auth.routes import auth
-    from rondo.admin.routes import admin
+    from rondo.superadmin.routes import superadmin
 
 
-    app.register_blueprint(admin)
+    app.register_blueprint(superadmin)
     app.register_blueprint(auth)
 
     return app

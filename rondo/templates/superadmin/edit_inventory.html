@@ -1,9 +1,9 @@
 {% extends 'layouts/dashboard.html' %}
-
+{% set active_page = 'inventory' %}
 {% block main %}
 <div class="login-container" style="background-color: #1C181C;">
 
-<form action="{{ url_for('admin.edit_inventory', id=laptop.id) }}" method="post">
+<form action="{{ url_for('superadmin.edit_inventory', id=laptop.id) }}" method="post">
   <div class="field">
     <label class="label">Laptop Brand Name</label>
     <div class="control has-icons-left">

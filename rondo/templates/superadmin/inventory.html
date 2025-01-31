@@ -18,7 +18,7 @@ block top_bar_buttons %}
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <form action="{{ url_for('admin.inventory') }}" method="post">
+      <form action="{{ url_for('superadmin.inventory') }}" method="post">
         <div class="field">
           <label class="label">Laptop Brand Name</label>
           <div class="control has-icons-left">
@@ -117,10 +117,10 @@ block top_bar_buttons %}
           <td>{{ laptop[0].price }}</td>
           <td>{{ laptop[0].date_entered }}</td>
           <td>
-          {% if cp(current_user.permissions, 'edit') %}
+          {% if cp(current_user.permissions, 'update') %}
             <a
               class="button is-link is-info is-small"
-              href="{{ url_for('admin.edit_inventory', id=laptop[0].id) }}"
+              href="{{ url_for('superadmin.edit_inventory', id=laptop[0].id) }}"
               ><i class="fa-solid fa-pencil"></i
             ></a>
             |
