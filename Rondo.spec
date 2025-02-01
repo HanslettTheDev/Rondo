@@ -5,7 +5,7 @@ a = Analysis(
     ['gui.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('rondo/static/', 'static'), ('rondo/templates/', 'templates'), ('rondo/rondo.db', 'rondo')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
