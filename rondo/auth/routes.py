@@ -14,7 +14,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard'))
+        return redirect(url_for('superadmin.dashboard'))
     
     if request.method == "POST":
         username = request.form["username"].strip().lower()
@@ -31,7 +31,7 @@ def login():
         
         login_user(admin[0])
         next_page = request.args.get("next")
-        return redirect(next_page) if next_page else redirect(url_for("admin.dashboard"))
+        return redirect(next_page) if next_page else redirect(url_for("superadmin.dashboard"))
     
     return render_template("auth/login.html")
 
