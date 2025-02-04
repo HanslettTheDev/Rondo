@@ -39,7 +39,7 @@ def inventory():
         db.session.commit()
 
         flash("Stock successfully added", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
 
     
     return render_template("superadmin/inventory.html", title="Inventory", laptops=laptops, cp=check_permission)
@@ -62,7 +62,7 @@ def edit_inventory(id):
         db.session.commit()
 
         flash("Record Modified Successfully", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
         
     return render_template("superadmin/edit_inventory.html", laptop=laptop[0])
 
@@ -78,10 +78,10 @@ def delete_inventory(id):
         db.session.commit()
 
         flash("Record deleted successfully", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
     else:
         flash("An error occured while deleting this record! Try again later", "danger")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
 
 
 @superadmin.route('/user_management', methods=['GET', 'POST'])
@@ -106,11 +106,11 @@ def user_management():
         # Check if the new role is the same as the old one
         if user[0].role.name.lower() == new_role:
             flash(f"Oops! Sorry! {user[0].username} already has this role!", "warning")
-            return redirect(url_for("admin.user_management"))
+            return redirect(url_for("superadmin.user_management"))
 
         if not (user and role):
             flash('An unexpected error occured while assigning an admin', "info")
-            return redirect(url_for("admin.user_management"))
+            return redirect(url_for("superadmin.user_management"))
         
         # Get all the permissions for that user
         user[0].role = role[0]
@@ -127,7 +127,7 @@ def user_management():
             f"<b>@{user[0].username}</b> has successfully been assigned the <b>{role[0].name}</b> role!", 
             "info"
         )
-        return redirect(url_for('admin.user_management'))
+        return redirect(url_for('superadmin.user_management'))
     
     return render_template("superadmin/user_management.html", title="User Management", 
         users=users, roles=roles, permissions=permsisions

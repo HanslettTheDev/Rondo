@@ -18,4 +18,4 @@ app.template_folder = get_resource_path("templates")
 if __name__ == "__main__":
     webview.create_window("Rondo Management App", app, min_size=(1000, 700))
     webview.settings['OPEN_DEVTOOLS_IN_DEBUG'] = False
-    webview.start(debug=True)
+    webview.start(gui="edgechromium")
