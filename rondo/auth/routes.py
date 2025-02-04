@@ -1,9 +1,11 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
+from rondo.auth.utils import get_permission_objects
 from rondo.models.roles_permissions import Role
 from rondo.models.users import Users
 from rondo.extensions import db, bcrypt
+from rondo.defaults import DEFAULT_ROLE_PERMISSIONS
 
 
 auth = Blueprint('auth', __name__)
@@ -12,7 +14,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard'))
+        return redirect(url_for('superadmin.dashboard'))
     
     if request.method == "POST":
         username = request.form["username"].strip().lower()
@@ -29,7 +31,7 @@ def login():
         
         login_user(admin[0])
         next_page = request.args.get("next")
-        return redirect(next_page) if next_page else redirect(url_for("admin.dashboard"))
+        return redirect(next_page) if next_page else redirect(url_for("superadmin.dashboard"))
     
     return render_template("auth/login.html")
 
@@ -58,6 +60,10 @@ def register():
         )
         role = db.session.execute(db.select(Role).filter_by(name="user")).first()
         new_user.role = role[0]
+
+        # add the new permissions
+        for perm in get_permission_objects(DEFAULT_ROLE_PERMISSIONS[role[0].name]):
+            new_user.permissions.append(perm[0])
 
         db.session.add(new_user)
         db.session.commit()

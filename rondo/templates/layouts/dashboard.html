@@ -13,17 +13,17 @@
       <div class="sidebar-items">
         <ul>
           <li class="{{'active' if active_page == 'dashboard' }}">
-            <a href="{{ url_for('admin.dashboard') }}">
+            <a href="{{ url_for('superadmin.dashboard') }}">
               <i class="fa-solid fa-house"></i> Dashboard
             </a>
           </li>
           <li class="{{'active' if active_page == 'inventory' }}">
-            <a href="{{ url_for('admin.inventory') }}">
+            <a href="{{ url_for('superadmin.inventory') }}">
               <i class="fa-solid fa-truck-ramp-box"></i> Iventory
             </a>
           </li>
           <li class="{{'active' if active_page == 'user-management' }}"
-            ><a href="{{ url_for('admin.user_management') }}">
+            ><a href="{{ url_for('superadmin.user_management') }}">
               <i class="fa-regular fa-user"></i> User Management
             </a>
           </li>
@@ -31,7 +31,7 @@
             ><a href=""> <i class="fa-solid fa-sack-dollar"></i> Sales </a>
           </li> -->
           <li class="{{'active' if active_page == 'logs' }}"
-            ><a href="{{ url_for('admin.logs') }}"> <i class="fa-solid fa-clipboard"></i> Logs </a>
+            ><a href="{{ url_for('superadmin.logs') }}"> <i class="fa-solid fa-clipboard"></i> Logs </a>
           </li>
           <!-- <li class="{{'active' if active_page == 'backup' }}"
             ><a href=""> <i class="fa-solid fa-server"></i> Backup </a>
@@ -47,10 +47,10 @@
       <div class="bar-items">
         <ul>
           {% block right_bar_buttons %}
-          <li>
-            <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
-          </li>
           {% endblock %}
+          <li>
+            <a href="{{ url_for('auth.logout') }}"> <i class="fa-solid fa-door-open"></i> Logout </a>
+          </li>
         </ul>
       </div>
     </div>

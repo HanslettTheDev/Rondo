@@ -3,20 +3,20 @@ from flask_login import current_user, login_required
 from rondo.defaults import DEFAULT_ROLE_PERMISSIONS
 from rondo.extensions import db, bcrypt
 from rondo.models.users import Users
-from rondo.models.roles_permissions import Role, UserPermissions, UserRoles, Permissions
+from rondo.models.roles_permissions import Role, Permissions
 from rondo.models.logs import Logs
 from rondo.models.laptop import LaptopTable, laptopIventory
 from rondo.wrappers import role_required
 from rondo.superadmin.utils import delete_previous_permissions, get_permission_objects, check_permission
 
-admin = Blueprint("admin", __name__)
+superadmin = Blueprint("superadmin", __name__)
 
-@admin.route('/dashboard')
+@superadmin.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template("admin/main.html", title="Dashboard")
+    return render_template("superadmin/main.html", title="Dashboard")
 
-@admin.route('/inventory', methods=['GET', 'POST'])
+@superadmin.route('/inventory', methods=['GET', 'POST'])
 @login_required
 @role_required(["superadmin", "admin"])
 def inventory():
@@ -39,12 +39,12 @@ def inventory():
         db.session.commit()
 
         flash("Stock successfully added", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
 
     
-    return render_template("admin/inventory.html", title="Inventory", laptops=laptops, cp=check_permission)
+    return render_template("superadmin/inventory.html", title="Inventory", laptops=laptops, cp=check_permission)
 
-@admin.route("/inventory/edit/<int:id>", methods=["GET", "POST"])
+@superadmin.route("/inventory/edit/<int:id>", methods=["GET", "POST"])
 @login_required
 @role_required(["superadmin", "admin"])
 def edit_inventory(id):
@@ -62,12 +62,12 @@ def edit_inventory(id):
         db.session.commit()
 
         flash("Record Modified Successfully", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
         
-    return render_template("admin/edit_inventory.html", laptop=laptop[0])
+    return render_template("superadmin/edit_inventory.html", laptop=laptop[0])
 
 
-@admin.route("/inventory/delete/<int:id>", methods=["GET", "POST"])
+@superadmin.route("/inventory/delete/<int:id>", methods=["GET", "POST"])
 @login_required
 @role_required(["superadmin", "admin"])
 def delete_inventory(id):
@@ -78,13 +78,13 @@ def delete_inventory(id):
         db.session.commit()
 
         flash("Record deleted successfully", "success")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
     else:
         flash("An error occured while deleting this record! Try again later", "danger")
-        return redirect(url_for("admin.inventory"))
+        return redirect(url_for("superadmin.inventory"))
 
 
-@admin.route('/user_management', methods=['GET', 'POST'])
+@superadmin.route('/user_management', methods=['GET', 'POST'])
 @login_required
 @role_required(["superadmin"])
 def user_management():
@@ -106,11 +106,11 @@ def user_management():
         # Check if the new role is the same as the old one
         if user[0].role.name.lower() == new_role:
             flash(f"Oops! Sorry! {user[0].username} already has this role!", "warning")
-            return redirect(url_for("admin.user_management"))
+            return redirect(url_for("superadmin.user_management"))
 
         if not (user and role):
             flash('An unexpected error occured while assigning an admin', "info")
-            return redirect(url_for("admin.user_management"))
+            return redirect(url_for("superadmin.user_management"))
         
         # Get all the permissions for that user
         user[0].role = role[0]
@@ -127,51 +127,14 @@ def user_management():
             f"<b>@{user[0].username}</b> has successfully been assigned the <b>{role[0].name}</b> role!", 
             "info"
         )
-        return redirect(url_for('admin.user_management'))
+        return redirect(url_for('superadmin.user_management'))
     
-    return render_template("admin/user_management.html", title="User Management", 
+    return render_template("superadmin/user_management.html", title="User Management", 
         users=users, roles=roles, permissions=permsisions
     )
 
-@admin.route('/logs')
+@superadmin.route('/logs')
 @login_required
 @role_required(["superadmin"])
 def logs():
-    return render_template("admin/logs.html")
-
-# @admin.route("/fill")
-# def fill():
-#     role = Role()
-#     role.add_default_roles()
-
-#     permission = Permissions()
-#     permission.add_default_permissions()
-
-#     roles = Role.query.all()
-#     permissions = Permissions.query.all()
-
-
-#     return jsonify({"role": list([role.name for role in roles]), "permission": list([permission.name for permission in permissions])})
-
-# @admin.route("/test", methods=["GET", "POST"])
-# def register():
-#     # user = Users(
-#     #     username="admin", name="tambe hanslett", 
-#     #     email="admin", password=bcrypt.generate_password_hash("admin")
-#     # )
-
-#     user = Users.query.filter_by(username="admin").first()
-
-#     # user.role = Role.query.filter_by(name="superadmin").first()
-#     # Give this user 3 more permissions 
-#     perm1 = Permissions.query.filter_by(name="superadmin.create_admin").first()
-#     perm2 = Permissions.query.filter_by(name="create").first()
-#     perm3 = Permissions.query.filter_by(name="read").first()
-
-#     user.permissions.append(perm1)
-#     user.permissions.append(perm2)
-#     user.permissions.append(perm3)
-#     # db.session.add(user)
-#     db.session.commit()
-
-#     return jsonify({"users":  user.role.name})
+    return render_template("superadmin/logs.html")

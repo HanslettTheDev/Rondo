@@ -1,0 +1,9 @@
+build:
+	pyinstaller gui.py -D -n "Rondo" --uac-admin  --clean --noconfirm --add-data rondo/static/:static --add-data rondo/templates/:templates --add-data rondo/rondo.db:rondo
+
+debug:
+	pyinstaller gui.py -D -n "Rondo" -w --uac-admin  --clean --noconfirm --add-data rondo/static/:static --add-data rondo/templates/:templates --add-data rondo/rondo.db:rondo
+
+clean: 
+	rm -rf ./dist
+	rm -rf ./build

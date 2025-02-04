@@ -22,15 +22,13 @@ block top_bar_buttons %}
 <li>
   <a href=""> <i class="fa-solid fa-gear"></i> Settings </a>
 </li>
-<li>
-  <a href=""> <i class="fa-solid fa-door-open"></i> Logout </a>
-</li>
 {% endblock %}
 
 {% block main %} 
 
 
 <div class="summary-section">
+  {% include 'components/notification.html' %}
   <div class="columns">
     <div class="column is-two-thirds">
       <h2 class="title is-4">Sales Activity</h2>
