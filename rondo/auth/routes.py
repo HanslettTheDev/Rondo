@@ -59,7 +59,6 @@ def register():
             email=email, password=bcrypt.generate_password_hash(password)
         )
         role = db.session.execute(db.select(Role).filter_by(name="user")).first()
-        print(new_user.role)
         new_user.role = role[0]
 
         # add the new permissions

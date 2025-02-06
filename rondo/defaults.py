@@ -9,5 +9,5 @@ DEFAULT_ROLE_PERMISSIONS = {
     "superadmin": [x for x in DEFAULT_PERMISSIONS],
     "admin": ["create", "read", "delete", "update"],
     "editor": ["update", "create"],
-    "user": ["view"]
+    "user": ["read"]
 }
