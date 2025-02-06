@@ -18,7 +18,7 @@ def role_required(role: str | list):
             # check the users role and see if it matches the others
             if current_user.role.name.lower() not in roles:
                 flash("Sorry, you do not have the access rights to that page", "error")
-                return redirect(url_for('admin.dashboard'))
+                return redirect(url_for('superadmin.dashboard'))
 
             # return the route function if all the conditions above pass
             return fn(*args, **kwargs)
