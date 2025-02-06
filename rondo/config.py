@@ -1,20 +1,16 @@
 import os
+from rondo.utils import get_env
 
-
-path = os.path.join(
-    os.path.abspath(os.path.dirname(__file__)),
-    "rondo.db"
-)
 
 class Config:
-    DEBUG = True
-    SECRET_KEY = "Some key here, not a password"
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{path}"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    MAIL_SERVER = "smtp.googlemail.com"
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    TESTING = False
-    MAIL_USERNAME = "hanslettj@gmail.com"
-    MAIL_DEFAULT_SENDER = "rondo@rondo.com"
-    MAIL_PASSWORD = "rudphandxyvrimtl"
+    DEBUG = get_env("DEBUG")
+    SECRET_KEY = get_env("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = get_env("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_TRACK_MODIFICATIONS = get_env("SQLALCHEMY_TRACK_MODIFICATIONS")
+    MAIL_SERVER = get_env("MAIL_SERVER")
+    MAIL_PORT = get_env("MAIL_PORT")
+    MAIL_USE_TLS = get_env("MAIL_USE_TLS")
+    TESTING = get_env("TESTING")
+    MAIL_USERNAME = get_env("MAIL_USERNAME")
+    MAIL_DEFAULT_SENDER = get_env("MAIL_DEFAULT_SENDER")
+    MAIL_PASSWORD = get_env("MAIL_PASSWORD")

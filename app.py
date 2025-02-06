@@ -6,4 +6,5 @@ app = create_app()
 # updater = Updater
 
 if __name__ == "__main__":
+    print(app.config)
     app.run()
