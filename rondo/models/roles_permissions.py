@@ -1,6 +1,4 @@
 from rondo.extensions import db
-from rondo.defaults import DEFAULT_ROLES
-from rondo.defaults import DEFAULT_PERMISSIONS
 
 class Permissions(db.Model):
     __tablename__ = "permissions"
@@ -11,12 +9,6 @@ class Permissions(db.Model):
 
     def __repr__(self):
         return '<Permission %r>' % self.name
-    
-    @staticmethod
-    def add_default_permissions():
-        for permission in DEFAULT_PERMISSIONS:
-            db.session.add(Permissions(name=permission))
-            db.session.commit()
 
 
 class Role(db.Model):
@@ -32,13 +24,6 @@ class Role(db.Model):
     @staticmethod
     def get_by_name(name):
         return Role.query.filter_by(name=name).first()
-    
-    @staticmethod
-    def add_default_roles():
-        for role in DEFAULT_ROLES:
-            db.session.add(Role(name=role))
-            db.session.commit()
-           
 
 class UserRoles(db.Model):
     __tablename__ = "user_roles"
