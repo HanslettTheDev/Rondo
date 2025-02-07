@@ -53,10 +53,11 @@ def register():
         
         if user or emails:
             flash("Username or Email already taken", "danger")
+            return redirect(url_for("auth.register"))
 
         new_user = Users(
             username=username, name=name, 
-            email=email, password=bcrypt.generate_password_hash(password)
+            email=email, password=bcrypt.generate_password_hash(password).decode("utf-8")
         )
         role = db.session.execute(db.select(Role).filter_by(name="user")).first()
         new_user.role = role[0]
