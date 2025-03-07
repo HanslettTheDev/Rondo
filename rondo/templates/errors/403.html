@@ -1,0 +1,12 @@
+{% extends 'layouts/dashboard.html' %} {% block main %}
+<div class="content">
+  <h1>You don't have permission to do that (403)</h1>
+  <p>Please check your account permission and try again</p>
+</div>
+
+
+<div class="log">
+  <h1>Error Log</h1>
+  {{ error }}
+</div>
+{% endblock %}

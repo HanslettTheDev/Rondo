@@ -22,9 +22,11 @@ def create_app(config_class=Config):
 
     from rondo.auth.routes import auth
     from rondo.superadmin.routes import superadmin
+    from rondo.errors.handlers import errors
 
 
     app.register_blueprint(superadmin)
     app.register_blueprint(auth)
+    app.register_blueprint(errors)
 
     return app

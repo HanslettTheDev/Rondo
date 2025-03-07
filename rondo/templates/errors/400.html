@@ -1,0 +1,13 @@
+
+{% extends 'layouts/dashboard.html' %} {% block main %}
+<div class="content">
+  <h1>The request was not completed (400)</h1>
+  <p>Please try making the request later</p>
+</div>
+
+
+<div class="log">
+  <h1>Error Log</h1>
+  {{ error }}
+</div>
+{% endblock %}

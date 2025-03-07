@@ -25,7 +25,7 @@
           <label class="label">Select Users Account</label>
           <div class="control has-icons-left">
             <div class="select">
-              <select name="users-account">
+              <select name="users-account" required>
                 {% for user in users %} {% if user[0].role.name != "superadmin"
                 %}
                 <option value="{{ user[0].username }}"

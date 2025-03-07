@@ -1,0 +1,14 @@
+{% extends 'layouts/dashboard.html' %} {% block main %}
+<div class="content">
+  <h1>Something went wrong (500)</h1>
+  <p
+    >We're experiencing some issues on our end processing this request, Please
+    try again later</p
+  >
+</div>
+
+<div class="log">
+  <h1>Error Log</h1>
+  {{ error }}
+</div>
+{% endblock %}
