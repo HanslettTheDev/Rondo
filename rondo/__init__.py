@@ -22,6 +22,7 @@ def create_app(config_class=Config):
 
     from rondo.auth.routes import auth
     from rondo.superadmin.routes import superadmin
+    from rondo.user.routes import user
     from rondo.errors.handlers import errors
 
 
