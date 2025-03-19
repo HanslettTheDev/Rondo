@@ -1,10 +1,11 @@
 import os
 import sys
-from flask import Flask 
-from rondo.extensions import db, login_manager, migrate, bcrypt
-from rondo.config import Config
-from rondo.commands import create, seed, superuser
 
+from flask import Flask
+
+from rondo.commands import create, seed, superuser
+from rondo.config import Config
+from rondo.extensions import bcrypt, db, login_manager, migrate
 
 
 def create_app(config_class=Config):
@@ -21,13 +22,13 @@ def create_app(config_class=Config):
     # mail.init_app(app)
 
     from rondo.auth.routes import auth
+    from rondo.errors.handlers import errors
     from rondo.superadmin.routes import superadmin
     from rondo.user.routes import user
-    from rondo.errors.handlers import errors
-
 
     app.register_blueprint(superadmin)
     app.register_blueprint(auth)
+    app.register_blueprint(user)
     app.register_blueprint(errors)
 
     return app
