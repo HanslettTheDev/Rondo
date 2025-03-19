@@ -2,7 +2,7 @@
 <div class="login-container">
 <h1 class="title is-3 f-center">Rondo Register</h1>
 <form action="{{ url_for("auth.register") }}" method="post">
-    {% include 'components/form_error_messages.html' %}
+    {% include 'components/login_form_error_messages.html' %}
   <div class="field">
     <label class="label">Name</label>
     <div class="control">

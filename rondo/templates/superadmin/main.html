@@ -30,20 +30,23 @@ block top_bar_buttons %}
 <div class="summary-section">
   {% include 'components/notification.html' %}
   <div class="columns">
-    <div class="column is-two-thirds">
-      <h2 class="title is-4">Sales Activity</h2>
-      <div class="sales-activity">
-        {% include 'components/sales_card.html' %} {% include
-        'components/sales_card.html' %} {% include 'components/sales_card.html'
-        %}
-      </div>
-    </div>
     <div class="column">
-      <h2 class="title is-4">Inventory Summary</h2>
-      <div class="sales-activity">
-        {% include 'components/sales_card.html' %}
-      </div>
+      <h2 class="title is-4">Users Pending Approval</h2>
+    {% if users %}
+    <ul style="color: black; padding: 10px; margin-left: 20px; font-size: 15px;">
+        {% for user in users %}
+                <ol style="border: 1px solid black; padding: 5px; width: 20%;">{{ user.name }} | 
+                    <a href="{{ url_for('superadmin.approve_user', user_id=user.id) }}">
+                        Approve</a> | <a href="#">Ignore
+                    </a>
+                </ol>
+        {% endfor %}
+    </ul>
     </div>
+    {% else %}
+        No users are currently pending approval
+    {% endif %}
+    
   </div>
 </div>
 {% endblock %}
